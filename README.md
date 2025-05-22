@@ -142,23 +142,27 @@ ________________________________________________________________________________
 3. Сбор метрик работает после отработки основного скрипта, так что нужно что бы отработал один скрипт, затем отдельный скрипт на сбор метрик <br>
 
 ```
- #!/bin/bash
+ 
+#!/bin/bash
 
-# Функция для сбора метрик
-collect_metrics() {
     echo "Сбор метрик AWS..."
-    # Пример команды для получения метрик (можно изменить по необходимости)
-    aws cloudwatch list-metrics
-}
 
-# Вызов функции сбора метрик
-collect_metrics
+aws cloudwatch get-metric-statistics \
+    --namespace AWS/EC2 \
+    --metric-name CPUUtilization \
+    --dimensions Name=InstanceId,Value=i-060f01820a091c097 \
+    --start-time $(date -u -d '1 hour ago' +%Y-%m-%dT%H:%M:%SZ) \
+    --end-time $(date -u +%Y-%m-%dT%H:%M:%SZ) \
+    --period 300 \
+    --statistics Average \
+    --region us-east-1  # Замените на ваш регион
 
 ```
 
 ИТОГ: <br>
 
-![image](https://github.com/user-attachments/assets/56e6a134-1063-464c-be65-941a915fd2c7)
+![image](https://github.com/user-attachments/assets/35374ce0-9f77-42ab-b301-385ead659a60)
+
 
 
 
