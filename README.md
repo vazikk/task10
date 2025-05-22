@@ -142,32 +142,24 @@ ________________________________________________________________________________
 3. Сбор метрик работает после отработки основного скрипта, так что нужно что бы отработал один скрипт, затем отдельный скрипт на сбор метрик <br>
 
 ```
-  #!/bin/bash
+ #!/bin/bash
 
-set -e
-
+# Функция для сбора метрик
 collect_metrics() {
-    echo "Collecting AWS CLI metrics..."
-
-    echo -e "\n=== System Information ==="
-    uname -a
-
-    echo -e "\n=== AWS CLI Version ==="
-    aws --version
-
-    echo -e "\n=== Installed AWS Components ==="
-    which aws
-    ls -la $(which aws)
-
+    echo "Сбор метрик AWS..."
+    # Пример команды для получения метрик (можно изменить по необходимости)
+    aws cloudwatch list-metrics
 }
 
+# Вызов функции сбора метрик
 collect_metrics
 
 ```
 
 ИТОГ: <br>
 
-![image](https://github.com/user-attachments/assets/38d2a92f-8c28-4388-b6a5-2427587c103d)
+![image](https://github.com/user-attachments/assets/56e6a134-1063-464c-be65-941a915fd2c7)
+
 
 
 
